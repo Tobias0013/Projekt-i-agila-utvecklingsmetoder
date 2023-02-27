@@ -5,3 +5,4 @@ htmlcov/
 *.pyc
 dice/doc
 guess/doc
+build/
