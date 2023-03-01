@@ -37,14 +37,14 @@ test:
     #- tox -e py36,flake8
     - make test
 
-run:
-  script:
+#run:
+ # script:
     #- python setup.py bdist_wheel
     # an alternative approach is to install and run:
     #- pip install dist/*
     # run the command here
-  artifacts:
-    paths:
+  #artifacts:
+   # paths:
       #- dist/*.whl
 
 pages:
