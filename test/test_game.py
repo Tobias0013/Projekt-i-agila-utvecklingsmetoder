@@ -4,7 +4,7 @@
 """Unit testing."""
 
 import unittest
-from guess import game
+from app import game
 
 
 class TestGameClass(unittest.TestCase):
