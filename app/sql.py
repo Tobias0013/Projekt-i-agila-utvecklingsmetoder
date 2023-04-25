@@ -1,28 +1,25 @@
-import pyodbc
+import mariadb
 
 
 class sql:
     def __init__(self):
-        self._DRIVER = "{ODBC Driver 17 for SQL Server}"
-        self._SERVER = "LOCALHOST"
-        self._DATABASE = "mediation_db"
-        self.conn = None
-        self.cursor = None
-
-    def connect(self):
-        """Connect to database."""
-        conn_str = "DRIVER=" + self._DRIVER + "; " \
-                   "SERVER=" + self._SERVER + "; " \
-                   "DATABASE=" + self._DATABASE + "; " \
-                   "Trusted_Connection=yes"
-        self.conn = pyodbc.connect(conn_str)
+        try:
+            self.conn = mariadb.connect(
+                user="meditation_user",
+                password="J%xLsAb19475",
+                host="83.250.124.8",
+                port=3306,
+                database="mediation_db"
+            )
+        except mariadb.Error as e:
+            print(f"Error connecting to MariaDB Platform: {e}")
         self.cursor = self.conn.cursor()
 
     def close(self):
         self.cursor.close()
         self.conn.close()
 
-    def get_result(self):
+    def _get_result(self):
         """Gets result data from SELECT statement in form of list of dicts."""
         # takes out column names
         column_name = []
