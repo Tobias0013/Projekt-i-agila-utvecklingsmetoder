@@ -1,7 +1,7 @@
 from tkinter import *
 from sql_login import sql_login
 from sql_register import sql_register
-import Menu
+import menu
 
 
 class login_form:
@@ -64,8 +64,8 @@ class login_form:
         # close the current window
         self.login_screen.destroy()
 
-        # run Menu.py
-        Menu.menu()
+        # run menu.py
+        menu.menu()
 
     def btn_register(self):
         # check if entry is empty
@@ -88,9 +88,9 @@ class login_form:
         self.lbl_message.set("register successful")
 
     def skip(self):
-        """Run Menu.py. [ta bort denna metod sen]"""
+        """Run menu.py. [ta bort denna metod sen]"""
         # close the current window
         self.login_screen.destroy()
 
-        # run Menu.py
-        Menu.menu()
+        # run menu.py
+        menu.menu()
