@@ -1,10 +1,11 @@
 from tkinter import *
-from app.sql_login import sql_login as database_con
+from sql_login import sql_login as database_con
 import menu
 
 
 class login_form:
     def __init__(self):
+        """Constructor."""
         self.login_screen = Tk()
         self.ent_username = StringVar()
         self.ent_password = StringVar()
@@ -12,11 +13,12 @@ class login_form:
         self.database = database_con()
 
     def start_login_form(self):
+        """Constructs and start the form for login screen."""
         # Setting title of screen
-        self.login_screen.title("Login Form")
-        # setting height and width of screen
+        self.login_screen.title("Grundträning - ett redskap mot stress")
+        # Setting height and width of screen
         self.login_screen.geometry("300x300")
-
+        # Setting a function that executes when windows is closing
         self.login_screen.protocol("WM_DELETE_WINDOW", self.on_closing)
 
         # Creating layout of login form
@@ -44,12 +46,13 @@ class login_form:
         self.login_screen.mainloop()
 
     def btn_login(self):
-        # check if entry is empty
+        """Runs when pressing login button."""
+        # Check if entry is empty
         if self.ent_username.get() == "" or self.ent_password.get() == "":
             self.lbl_message.set("fill all fields")
             return
 
-        # check if login successful
+        # Check if login successful
         if not self.database.login(self.ent_username.get(), self.ent_password.get()):
             self.lbl_message.set("Wrong username or password")
             return
@@ -64,7 +67,8 @@ class login_form:
         menu.menu()
 
     def btn_register(self):
-        # check if entry is empty
+        """Runs when pressing register button."""
+        # Check if entry is empty
         if self.ent_username.get() == "" or self.ent_password.get() == "":
             self.lbl_message.set("fill all fields")
             return
@@ -79,16 +83,16 @@ class login_form:
 
     def on_closing(self):
         """Runs when closing login window."""
-        # close database connection
+        # Close database connection
         self.database.close()
-        # close the current window
+        # Close the current window
         self.login_screen.destroy()
 
     def skip(self):
         """Run menu.py. [ta bort denna metod sen]"""
-        # close database connection
+        # Close database connection
         self.database.close()
-        # close the current window
+        # Close the current window
         self.login_screen.destroy()
-        # run menu.py
+        # Run menu.py
         menu.menu()

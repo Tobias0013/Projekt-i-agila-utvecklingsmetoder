@@ -6,3 +6,5 @@ htmlcov/
 dice/doc
 app/doc
 build/
+.vscode
+.idea
