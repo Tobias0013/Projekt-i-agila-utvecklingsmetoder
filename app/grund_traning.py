@@ -10,5 +10,5 @@ class grund_traning_button(tk.Button):  # Grundtraining class
         self["command"] = self.grund_traning_command
   
     def grund_traning_command(self):
-        winsound.PlaySound("app\zero_to_ten_and_back.wav", winsound.SND_FILENAME)
-        winsound.PlaySound("app\Count.wav", winsound.SND_FILENAME)
+        winsound.PlaySound("zero_to_ten_and_back.wav", winsound.SND_FILENAME)
+        winsound.PlaySound("Count.wav", winsound.SND_FILENAME)
