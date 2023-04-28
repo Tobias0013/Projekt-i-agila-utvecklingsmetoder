@@ -1,5 +1,5 @@
 import tkinter as tk
-from grund_traning import grund_traning_button
+from grund_traning import grund_traning
 
 
 def menu():
@@ -17,7 +17,7 @@ def menu():
     button_list = []
     for i, value in enumerate(["Grundträning", "Fokusering", "Historik", "Kalender", "Exit"]):
         if value == "Grundträning":
-            button = grund_traning_button(button_frame)  # GRUNDTRÄNINGSKLASSS
+            button = grund_traning(button_frame)  # GRUNDTRÄNINGSKLASSS
         else:
             button = tk.Button(button_frame, text=value, width= 50, height=2, padx=10, pady=10, bg="#3264a8", font=("Arial", 10))
         button.grid(row=i)
