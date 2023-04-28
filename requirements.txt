@@ -22,4 +22,4 @@ coverage
 #Essential
 mariadb
 future~=0.18.3
-winsound
+winaudio
