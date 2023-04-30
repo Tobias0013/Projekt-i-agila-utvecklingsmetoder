@@ -12,9 +12,9 @@ class sql_login(sql.sql):
 
         res = self._get_result()
         if len(res) > 0:
-            return True
+            return True, res
         else:
-            return False
+            return False, None
 
     def register(self, usr, pswd):
         """Execute register query to database."""
