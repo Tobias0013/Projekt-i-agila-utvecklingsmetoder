@@ -52,8 +52,11 @@ class login_form:
             self.lbl_message.set("fill all fields")
             return
 
+        successful, account = self.database.login(self.ent_username.get(), self.ent_password.get())
+        print(account[0])
+
         # Check if login successful
-        if not self.database.login(self.ent_username.get(), self.ent_password.get()):
+        if not successful:
             self.lbl_message.set("Wrong username or password")
             return
 
@@ -64,7 +67,7 @@ class login_form:
         # close the current window
         self.login_screen.destroy()
         # run menu.py
-        menu.menu()
+        menu.menu(account[0])
 
     def btn_register(self):
         """Runs when pressing register button."""
