@@ -24,8 +24,9 @@ class menu():
             button = tk.Button(button_frame, text=value, width= 50, height=2, padx=10, pady=10, bg="#3264a8", font=("Arial", 10))
             button.grid(row=i)
             button_list.append(button)
-        # add event listener to kalender button
+        
         button_list[0].config(command=grund_traning(button_frame).grund_traning_command)
+        # add event listener to kalender button
         button_list[3].config(command=self.btn_calender_pressed)
         # Allows quit button to exit
         button_list[-1].config(command=root.destroy)
