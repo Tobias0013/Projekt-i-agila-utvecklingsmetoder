@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 
 from grund_traning import grund_traning
+from fokusering import fokusering
 from calendar_form import calendar_form
 
 class menu():
@@ -25,7 +26,10 @@ class menu():
             button.grid(row=i)
             button_list.append(button)
         
+        # Button for "Grundträning"
         button_list[0].config(command=grund_traning(button_frame).grund_traning_command)
+        # Button for "Fokusering"
+        button_list[1].config(command=fokusering(button_frame).fokusering_command)
         # add event listener to kalender button
         button_list[3].config(command=self.btn_calender_pressed)
         # Allows quit button to exit
