@@ -1,5 +1,8 @@
 import tkinter as tk
+from tkinter import messagebox
+
 from grund_traning import grund_traning
+from calendar_form import calendar_form
 
 class menu():
     def __init__(self, account):
@@ -27,6 +30,13 @@ class menu():
             button.grid(row=i)
             button_list.append(button)
 
-        button_list[-1].config(command=root.destroy)  # Allows quit button to exit
+        # add event listener to kalender button
+        button_list[3].config(command=self.btn_calender_pressed)
+        # Allows quit button to exit
+        button_list[-1].config(command=root.destroy)
 
         root.mainloop()
+
+    def btn_calender_pressed(self):
+        cal = calendar_form()
+        cal.start_calender_form()
