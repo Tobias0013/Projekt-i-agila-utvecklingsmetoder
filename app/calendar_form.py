@@ -1,18 +1,16 @@
 from tkinter import *
-from sql_login import sql_login as database_con
+from sql_emotion import sql_emotion as database_con
 import menu
 from tkcalendar import Calendar
+import datetime
 from datetime import date
 
-
 class calendar_form:
-    def __init__(self):
+    def __init__(self, account):
         """Constructor."""
         self.calendar_form = Tk()
-        # self.ent_username = StringVar()
-        # self.ent_password = StringVar()
-        # self.lbl_message = StringVar()
-        # self.database = database_con()
+        self.database = database_con()
+        self.account = account
 
         # Setting title of screen
         self.calendar_form.title("Grundträning - ett redskap mot stress")
@@ -26,20 +24,42 @@ class calendar_form:
         self.calendar = Calendar(self.calendar_form, selectmode='day', year=today.year, month=today.month, day=today.day)
         self.calendar.pack(pady=10)
         # Button get date
-        self.btn_get_date = Button(self.calendar_form, text="Get Date", width=10, height=1, bg="cornflower blue", command=self.click)
+        self.btn_get_date = Button(self.calendar_form, text="[Get Stuff]", width=10, height=1, bg="cornflower blue", command=self.click)
         self.btn_get_date.pack(pady=10)
         # Label date
         self.lbl_date = Label(self.calendar_form, text="")
         self.lbl_date.pack(pady=10)
 
+        self.load_emotion()
+
         self.calendar_form.mainloop()
 
+    def load_emotion(self):
+        res = self.database.select_emotion(self.account.get("username"))
+        print(res) # DEBUG
+
+        for r in res:
+            dt = r.get("emotion_date")
+            rating = "Rating: " + str(r.get("emotion_rating"))
+            text = " Text: " + r.get("emotion_text")
+
+            self.calendar.calevent_create(date=dt, text=rating + text, tags="Message")
+            self.calendar.tag_config("Message", background="#90ee90", foreground="black")
+
     def click(self):
-        self.lbl_date.config(text="Selected Date is: " + self.calendar.get_date())
+        raise NotImplementedError
+        # self.lbl_date.config(text="Selected Date is: " + self.calendar.get_date())
+
+        # dt_arr = self.calendar.get_date().split('/')
+        # dt = date(int("20" + dt_arr[2]), int(dt_arr[0]), int(dt_arr[1]))
+
+        # event = self.calendar.get_calevents(dt)
+        # self.calendar.event
+        # print(event)
 
     def on_closing(self):
         """Runs when closing login window."""
         # Close database connection
-        # self.database.close()
+        self.database.close()
         # Close the current window
         self.calendar_form.destroy()
