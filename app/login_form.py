@@ -35,13 +35,13 @@ class login_form:
         # Label for displaying login/register status
         Label(self.login_screen, text="", textvariable=self.lbl_message).place(x=95, y=100)
 
+
         # Buttons
         Button(self.login_screen, text="Login", width=10, height=1, bg="cornflower blue",
                command=self.btn_login).place(x=105, y=130)
         Button(self.login_screen, text="Register", width=10, height=1, bg="cornflower blue",
                command=self.btn_register).place(x=105, y=170)
-        Button(self.login_screen, text="[skip]", width=10, height=1, bg="cornflower blue",
-               command=self.skip).place(x=105, y=210)
+
 
         self.login_screen.mainloop()
 
@@ -53,7 +53,6 @@ class login_form:
             return
 
         successful, account = self.database.login(self.ent_username.get(), self.ent_password.get())
-        print(account[0])
 
         # Check if login successful
         if not successful:
@@ -90,12 +89,3 @@ class login_form:
         self.database.close()
         # Close the current window
         self.login_screen.destroy()
-
-    def skip(self):
-        """Run menu.py. [ta bort denna metod sen]"""
-        # Close database connection
-        self.database.close()
-        # Close the current window
-        self.login_screen.destroy()
-        # Run menu.py
-        menu.menu()
