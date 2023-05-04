@@ -3,8 +3,8 @@ import calender as cal
 
 
 def main():
-    # interface = login_form()
-    # interface.start_login_form()
+    interface = login_form()
+    interface.start_login_form()
     cal.Calender()
 
 
