@@ -1,5 +1,6 @@
 import tkinter as tk
 from grund_traning import grund_traning
+import calender as cal
 
 class menu():
     def __init__(self, account):
@@ -28,5 +29,6 @@ class menu():
             button_list.append(button)
 
         button_list[-1].config(command=root.destroy)  # Allows quit button to exit
+        button_list[3].config(command=cal.Calender)
 
         root.mainloop()
