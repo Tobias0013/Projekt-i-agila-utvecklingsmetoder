@@ -1,8 +1,5 @@
 from tkinter import *
 from sql_emotion import sql_emotion as database_con
-import menu
-from tkcalendar import Calendar
-import datetime
 from datetime import date
 
 class calendar_form:

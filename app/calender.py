@@ -1,7 +1,5 @@
 from tkinter import *
 import calendar
-import calendar
-from enum import Enum
 
 
 class Calender:
