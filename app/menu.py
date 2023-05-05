@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import messagebox
 
 from grund_traning import grund_traning
-import calender as cal
 from fokusering import fokusering
 from calendar_form import calendar_form
 from emotion_form import emotion_form

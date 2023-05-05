@@ -1,4 +1,5 @@
 from tkinter import *
+from tkcalendar import *
 from sql_emotion import sql_emotion as database_con
 from datetime import date
 
@@ -21,7 +22,7 @@ class calendar_form:
         self.calendar = Calendar(self.calendar_form, selectmode='day', year=today.year, month=today.month, day=today.day)
         self.calendar.pack(pady=10)
         # Button get date
-        self.btn_get_date = Button(self.calendar_form, text="[Get Stuff]", width=10, height=1, bg="cornflower blue", command=self.click)
+        self.btn_get_date = Button(self.calendar_form, text="[Hämta]", width=10, height=1, bg="cornflower blue", command=self.click)
         self.btn_get_date.pack(pady=10)
         # Label date
         self.lbl_date = Label(self.calendar_form, text="")
@@ -33,7 +34,7 @@ class calendar_form:
 
     def load_emotion(self):
         res = self.database.select_emotion(self.account.get("username"))
-        print(res) # DEBUG
+        # print(res) # DEBUG
 
         for r in res:
             dt = r.get("emotion_date")
@@ -44,15 +45,18 @@ class calendar_form:
             self.calendar.tag_config("Message", background="#90ee90", foreground="black")
 
     def click(self):
-        raise NotImplementedError
-        # self.lbl_date.config(text="Selected Date is: " + self.calendar.get_date())
+        """Fetch events from selected date"""
+        self.lbl_date.config(text="Selected Date is: " + self.calendar.get_date())
 
-        # dt_arr = self.calendar.get_date().split('/')
-        # dt = date(int("20" + dt_arr[2]), int(dt_arr[0]), int(dt_arr[1]))
+        dt_arr = self.calendar.get_date().split('/')
+        dt = date(int("20" + dt_arr[2]), int(dt_arr[0]), int(dt_arr[1]))
 
-        # event = self.calendar.get_calevents(dt)
-        # self.calendar.event
-        # print(event)
+        # Go through all events and make new label per event for selected date
+        for value, _ in enumerate(self.calendar.calevents):
+            val = self.calendar.calevents[_]
+            if val['date'] == dt:
+                Label(self.calendar_form, text=(f"{val['date']}, {val['text']}, {val['tags'][0]}")
+                      .replace('\n', '') + '\n').pack()
 
     def on_closing(self):
         """Runs when closing login window."""
