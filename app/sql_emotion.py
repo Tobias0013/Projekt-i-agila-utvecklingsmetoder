@@ -19,3 +19,18 @@ class sql_emotion(sql.sql):
         self.cursor.execute(query, (usr,))
 
         return self._get_result()
+
+    def insert_meditation(self, date, usr):
+        query = "INSERT INTO meditation(meditation_date, account_account_username) " \
+                "VALUES(?, ?)"
+        self.cursor.execute(query, (date, usr))
+        self.conn.commit()
+
+    def select_meditation(self, usr):
+        query = "SELECT meditation_date " \
+                "FROM account, meditation " \
+                "WHERE username=account_account_username " \
+                "AND username=?"
+        self.cursor.execute(query, (usr,))
+
+        return self._get_result()
