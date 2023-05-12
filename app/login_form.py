@@ -1,6 +1,7 @@
 from tkinter import *
 from sql_login import sql_login as database_con
 import menu
+from password_strength import PasswordPolicy
 
 
 class login_form:
@@ -35,12 +36,11 @@ class login_form:
         # Label for displaying login/register status
         Label(self.login_screen, text="", textvariable=self.lbl_message).place(x=95, y=100)
 
-
         # Buttons
         Button(self.login_screen, text="Login", width=10, height=1, bg="cornflower blue",
-               command=self.btn_login).place(x=105, y=130)
+               command=self.btn_login).place(x=105, y=190)
         Button(self.login_screen, text="Register", width=10, height=1, bg="cornflower blue",
-               command=self.btn_register).place(x=105, y=170)
+               command=self.btn_register).place(x=105, y=230)
 
 
         self.login_screen.mainloop()
@@ -80,8 +80,13 @@ class login_form:
             self.lbl_message.set("username already exists")
             return
 
+        # Check if pswd is following standards
+        if not self._password_standard(self.ent_password.get()):
+            return
+
         self.database.register(self.ent_username.get(), self.ent_password.get())
         self.lbl_message.set("register successful")
+
 
     def on_closing(self):
         """Runs when closing login window."""
@@ -89,3 +94,34 @@ class login_form:
         self.database.close()
         # Close the current window
         self.login_screen.destroy()
+
+    def _password_standard(self, pswd):
+        """Checks if password follows standards."""
+        policy = PasswordPolicy.from_names(
+            length=8,  # min length: 8
+            uppercase=1,  # need min. 1 uppercase letters
+            numbers=1,  # need min. 1 digits
+            special=1,  # need min. 1 special characters
+            nonletters=1,  # need min.1 non-letter characters (digits, specials, anything)
+        )
+        result = policy.test(pswd)
+
+        if len(result) == 0:
+            return True
+        else:
+            output_str = "Password must have:"
+            for i in result:
+                match i.__str__():
+                    case "Length(8)":
+                        output_str = output_str + "\nLength >= 8"
+                    case "Uppercase(1)":
+                        output_str = output_str + "\n1 uppercase"
+                    case "Numbers(1)":
+                        output_str = output_str + "\n1 number"
+                    case "Special(1)":
+                        output_str = output_str + "\n1 special"
+                    case _:
+                        print("error")
+            self.lbl_message.set(output_str)
+            return False
+
