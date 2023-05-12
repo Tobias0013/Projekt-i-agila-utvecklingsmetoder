@@ -1,3 +1,5 @@
+import hashlib
+
 import sql
 
 
@@ -7,8 +9,12 @@ class sql_login(sql.sql):
 
     def login(self, usr, pswd):
         """Execute login query to database. True = successful login, False = login failed"""
-        query = "SELECT * FROM account WHERE username='" + usr + "' AND password='" + pswd + "'"
-        self.cursor.execute(query)
+        # hash password
+        pswd_hash = hashlib.sha256(pswd.encode()).hexdigest()
+
+        # the reson for "(password=? OR password=?)" is to make application backward compatible
+        query = "SELECT * FROM account WHERE username=? AND (password=? OR password=?)"
+        self.cursor.execute(query, (usr, pswd_hash, pswd))
 
         res = self._get_result()
         if len(res) > 0:
@@ -24,8 +30,8 @@ class sql_login(sql.sql):
 
     def user_exist(self, usr):
         """Checks if user already exists. True = user exists, False = user not exists."""
-        query = "SELECT * FROM account WHERE username='" + usr + "'"
-        self.cursor.execute(query)
+        query = "SELECT * FROM account WHERE username=?"
+        self.cursor.execute(query, (usr,))
 
         res = self._get_result()
 

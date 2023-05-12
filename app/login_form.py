@@ -2,6 +2,7 @@ from tkinter import *
 from sql_login import sql_login as database_con
 import menu
 from password_strength import PasswordPolicy
+import hashlib
 
 
 class login_form:
@@ -84,7 +85,10 @@ class login_form:
         if not self._password_standard(self.ent_password.get()):
             return
 
-        self.database.register(self.ent_username.get(), self.ent_password.get())
+        # hash password
+        pswd = hashlib.sha256(self.ent_password.get().encode()).hexdigest()
+
+        self.database.register(self.ent_username.get(), pswd)
         self.lbl_message.set("register successful")
 
 
