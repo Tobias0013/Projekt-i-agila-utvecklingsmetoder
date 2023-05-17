@@ -11,9 +11,11 @@ class sql:
                 port=3306,
                 database="mediation_db"
             )
+            self.conn.ping()
         except mariadb.Error as e:
             print(f"Error connecting to MariaDB Platform: {e}")
         self.cursor = self.conn.cursor()
+
 
     def close(self):
         self.cursor.close()

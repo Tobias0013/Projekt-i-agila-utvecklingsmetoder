@@ -197,9 +197,6 @@ class emotion_form:
 
         self.database.insert_emotion(rating, text, date, self.account.get("username"))
 
-    def rbtn_pressed(self):
-        pass # kanske inte behövss
-
     def on_closing(self):
         """Runs when closing login window."""
         # Close database connection
