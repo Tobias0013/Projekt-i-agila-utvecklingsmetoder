@@ -7,7 +7,6 @@ Python development project template
 
 The project of group 5 in the course Agile Development Methods (https://www.hkr.se/kurs/DA116B/kursplan)
 
-[[_TOC_]]
 
 
 
