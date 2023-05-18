@@ -5,7 +5,7 @@ Python development project template
 [![Documentation Status](https://readthedocs.org/projects/a-python-project-template-codestyle-and-linters-included/badge/?version=latest)](https://a-python-project-template-codestyle-and-linters-included.readthedocs.io/en/latest/?badge=latest)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-A template for a Python development project.
+The project of group 5 in the course Agile Development Methods (https://www.hkr.se/kurs/DA116B/kursplan)
 
 [[_TOC_]]
 
