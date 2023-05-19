@@ -1,28 +1,21 @@
+import winsound
 import unittest
-from unittest.mock import patch, call
+from unittest.mock import patch
 import sys
 import os
-import tkinter as tk
-import winsound
-# Add the parent directory to the sys.path
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from fokusering import fokusering
+# Add the path to the 'app' module
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+from app.fokusering import fokusering
 
 
-class Test_fokusering(unittest.TestCase):
-    @patch("winsound.PlaySound")
-    def test_fokusering_command(self, mock_PlaySound):
-        # Create the necessary test objects
-        parent = tk.Tk()
-        button = fokusering(parent)
-        # Simulate button click
-        button.fokusering_command()
-        # Verify that PlaySound was called with the correct arguments
-        expected_calls = [
-            call("Fokusering.wav", winsound.SND_FILENAME),
-        ]
-        mock_PlaySound.assert_has_calls(expected_calls)
+class TestFokusering(unittest.TestCase):
+    def setUp(self):
+        self.fokusering_btn = fokusering(None)
 
+    @patch('winsound.PlaySound')
+    def test_play_sounds(self, mock_play_sound):
+        self.fokusering_btn.play_sounds()
+        mock_play_sound.assert_called_once_with("Fokusering.wav", winsound.SND_FILENAME)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()

@@ -1,29 +1,30 @@
 import unittest
-from unittest.mock import patch, call
+from unittest.mock import patch
 import sys
 import os
-import tkinter as tk
 import winsound
-# Add the parent directory to the sys.path
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from grund_traning import grund_traning
+import tkinter as tk
+
+# Add the path to the 'app' module
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+from app.grund_traning import grund_traning
 
 
-class TestGrundTraining(unittest.TestCase):
-    @patch("winsound.PlaySound")
-    def test_grund_traning_command(self, mock_PlaySound):
-        # Create the necessary test objects
-        parent = tk.Tk()
-        button = grund_traning(parent)
-        # Simulate button click
-        button.grund_traning_command()
-        # Verify that PlaySound was called with the correct arguments
+class TestGrundTraning(unittest.TestCase):
+    def setUp(self):
+        self.grund_traning_btn = grund_traning(None)
+
+    @patch('winsound.PlaySound')
+    def test_play_sounds(self, mock_play_sound):
+        self.grund_traning_btn.play_sounds()
+
         expected_calls = [
-            call("zero_to_ten_and_back.wav", winsound.SND_FILENAME),
-            call("Count.wav", winsound.SND_FILENAME)
+            ("zero_to_ten_and_back.wav", winsound.SND_FILENAME),
+            ("Count.wav", winsound.SND_FILENAME)
         ]
-        mock_PlaySound.assert_has_calls(expected_calls)
+        actual_calls = [call[0] for call in mock_play_sound.call_args_list]
 
+        self.assertEqual(actual_calls, expected_calls)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()
