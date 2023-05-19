@@ -139,26 +139,6 @@ Read more on:
 
 
 
-### Run parts of the testsuite
-
-You can also run parts of the testsuite, for examples files or methods in files.
-
-You can run all tests from a testfile.
-
-```
-# Run a testfile
-python -m unittest test.test_game
-```
-
-You can also run a single testcase from a file.
-
-```
-# Run a test method, in a class, in a testfile
-python -m unittest test.test_game.TestGameClass.test_init_default_object
-```
-
-
-
 ### Remove generated files
 
 You can remove all generated files by this.
