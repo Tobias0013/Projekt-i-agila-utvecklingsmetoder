@@ -13,7 +13,7 @@ class calendar_form:
         # Setting title of screen
         self.calendar_form.title("Grundträning - ett redskap mot stress")
         # Setting height and width of screen
-        self.calendar_form.geometry("300x300")
+        self.calendar_form.geometry("300x350")
         # Setting a function that executes when windows is closing
         self.calendar_form.protocol("WM_DELETE_WINDOW", self.on_closing)
 
