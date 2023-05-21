@@ -178,12 +178,6 @@ class emotion_form:
         self.btn_close.configure(command=self.on_closing)
         self.btn_submit.configure(command=self.btn_submit_pressed)
 
-        self.rbtn_1.configure(command=self.rbtn_pressed)
-        self.rbtn_2.configure(command=self.rbtn_pressed)
-        self.rbtn_3.configure(command=self.rbtn_pressed)
-        self.rbtn_4.configure(command=self.rbtn_pressed)
-        self.rbtn_5.configure(command=self.rbtn_pressed)
-
         self.emotion_screen.protocol("WM_DELETE_WINDOW", self.on_closing)
 
         self.emotion_screen.mainloop()
